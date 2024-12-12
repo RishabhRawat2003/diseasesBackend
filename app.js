@@ -3,7 +3,7 @@ import cors from 'cors'
 
 const app = express()
 
-const allowedOrigins = ["http://localhost:5173","http://localhost:8000","https://disease-three.vercel.app"]; // Add any other origins you need
+const allowedOrigins = ["http://localhost:5173", "http://localhost:8000", "https://disease-three.vercel.app"]; // Add any other origins you need
 
 app.use(
     cors({
@@ -23,6 +23,9 @@ app.use(express.json({ limit: '16kb' }))
 app.use(express.urlencoded({ extended: true, limit: '16kb' }))
 app.use(express.static('public'))
 
+app.get('/health', (req, res) => {
+    res.status(200).send('OK'); // Health check endpoint
+});
 
 // import router here
 import userRouter from './routes/user.route.js'
